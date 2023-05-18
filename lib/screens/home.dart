@@ -1,5 +1,5 @@
 import 'package:clean_architecture/core/templates/layout.dart';
-import 'package:clean_architecture/features/users/widget/user_list.dart';
+import 'package:clean_architecture/features/display_users/user_list.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {

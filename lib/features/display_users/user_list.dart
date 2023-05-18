@@ -1,7 +1,5 @@
-import 'dart:developer';
-
 import 'package:clean_architecture/core/api/api_client.dart';
-import 'package:clean_architecture/features/users/model/user.dart';
+import 'package:clean_architecture/models/user/user.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 

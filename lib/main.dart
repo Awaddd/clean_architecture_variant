@@ -1,6 +1,6 @@
-import 'package:clean_architecture/core/screens/home.dart';
 import 'package:clean_architecture/core/utils/color_schemes.g.dart';
 import 'package:clean_architecture/core/utils/typography.dart';
+import 'package:clean_architecture/screens/home.dart';
 import 'package:flutter/material.dart';
 
 void main() {
