@@ -26,11 +26,9 @@ class _UserListState extends ConsumerState<UserList> {
     if (usersInCache.isEmpty) {
       print('Cache is empty - making api call');
 
-      final apiClient = ApiClient(
-        Dio(BaseOptions(contentType: "application/json")),
-      );
+      final usersApi = ref.read(apiProvider);
 
-      await apiClient.getUsers().then((response) async {
+      await usersApi.getUsers().then((response) async {
         for (final user in response) {
           await usersBox.put(user.id.toString(), HiveUser.fromUserEntity(user));
         }

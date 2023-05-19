@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:clean_architecture/core/api/api_client.dart';
 import 'package:clean_architecture/data/user/user.dart';
+import 'package:dio/dio.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -17,4 +19,9 @@ Future<BoxCollection> initialiseCache() async {
   }
 
   return collection;
+}
+
+ApiClient initialiseApiClient() {
+  final Dio dio = Dio(BaseOptions(contentType: "application/json"));
+  return ApiClient(dio);
 }

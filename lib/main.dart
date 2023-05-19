@@ -9,6 +9,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 final counterProvider = StateProvider((ref) => 0);
 final cacheProvider = Provider((ref) => initialiseCache());
+final apiProvider = Provider((ref) => initialiseApiClient());
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
