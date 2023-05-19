@@ -1,15 +1,10 @@
 import 'package:clean_architecture/core/utils/color_schemes.g.dart';
-import 'package:clean_architecture/core/utils/helpers.dart';
 import 'package:clean_architecture/core/utils/typography.dart';
 import 'package:clean_architecture/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:hive_flutter/hive_flutter.dart';
-
-final counterProvider = StateProvider((ref) => 0);
-final cacheProvider = Provider((ref) => initialiseCache());
-final apiProvider = Provider((ref) => initialiseApiClient());
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

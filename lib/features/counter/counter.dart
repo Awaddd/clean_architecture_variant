@@ -1,5 +1,5 @@
+import 'package:clean_architecture/core/state/state.dart';
 import 'package:clean_architecture/core/utils/extensions.dart';
-import 'package:clean_architecture/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
