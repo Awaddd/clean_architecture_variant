@@ -9,5 +9,5 @@ abstract class ApiClient {
   factory ApiClient(Dio dio) = _ApiClient;
 
   @GET('/users')
-  Future<List<User>> getUsers();
+  Future<List<UserEntity>> getUsers();
 }

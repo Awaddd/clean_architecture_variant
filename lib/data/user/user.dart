@@ -4,7 +4,7 @@ import 'package:hive/hive.dart';
 part 'user.g.dart';
 
 @HiveType(typeId: 1)
-class HiveUser {
+class User {
   @HiveField(0)
   int id;
 
@@ -17,15 +17,15 @@ class HiveUser {
   @HiveField(3)
   String email;
 
-  HiveUser({
+  User({
     required this.id,
     required this.name,
     required this.username,
     required this.email,
   });
 
-  factory HiveUser.fromUserEntity(User user) {
-    return HiveUser(
+  factory User.fromUserEntity(UserEntity user) {
+    return User(
       id: user.id,
       name: user.name,
       username: user.username,

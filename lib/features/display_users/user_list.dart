@@ -11,12 +11,12 @@ class UserList extends ConsumerStatefulWidget {
 }
 
 class _UserListState extends ConsumerState<UserList> {
-  List<HiveUser> users = [];
+  List<User> users = [];
   bool loading = true;
 
   Future<void> getUsers() async {
     final db = await ref.read(cacheProvider);
-    final usersBox = await db.openBox<HiveUser>('users');
+    final usersBox = await db.openBox<User>('users');
     var usersInCache = await usersBox.getAllValues();
 
     //if cache is empty, make api call and store in cache
@@ -27,12 +27,12 @@ class _UserListState extends ConsumerState<UserList> {
 
       await usersApi.getUsers().then((response) async {
         for (final user in response) {
-          await usersBox.put(user.id.toString(), HiveUser.fromUserEntity(user));
+          await usersBox.put(user.id.toString(), User.fromUserEntity(user));
         }
       });
     }
 
-    final List<HiveUser> list = [];
+    final List<User> list = [];
 
     usersInCache = await usersBox.getAllValues();
 
@@ -63,12 +63,12 @@ class _UserListState extends ConsumerState<UserList> {
     return _users(users);
   }
 
-  Widget _users(List<HiveUser> users) {
+  Widget _users(List<User> users) {
     return Expanded(
       child: ListView.builder(
         itemCount: users.length,
         itemBuilder: (context, index) {
-          final HiveUser user = users[index];
+          final User user = users[index];
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: Column(

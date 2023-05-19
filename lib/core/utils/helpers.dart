@@ -15,7 +15,7 @@ Future<BoxCollection> initialiseCache() async {
   );
 
   if (!Hive.isAdapterRegistered(1)) {
-    Hive.registerAdapter(HiveUserAdapter());
+    Hive.registerAdapter(UserAdapter());
   }
 
   return collection;

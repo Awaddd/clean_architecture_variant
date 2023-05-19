@@ -4,24 +4,25 @@ import 'package:json_annotation/json_annotation.dart';
 part 'user.g.dart';
 
 @JsonSerializable()
-class User {
+class UserEntity {
   int id;
   String name;
   String username;
   String email;
 
-  User({
+  UserEntity({
     required this.id,
     required this.name,
     required this.username,
     required this.email,
   });
 
-  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
-  Map<String, dynamic> toJson() => _$UserToJson(this);
+  factory UserEntity.fromJson(Map<String, dynamic> json) =>
+      _$UserEntityFromJson(json);
+  Map<String, dynamic> toJson() => _$UserEntityToJson(this);
 
-  factory User.fromHiveUser(HiveUser user) {
-    return User(
+  factory UserEntity.fromHiveUser(User user) {
+    return UserEntity(
       id: user.id,
       name: user.name,
       username: user.username,

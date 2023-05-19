@@ -21,13 +21,13 @@ class _ApiClient implements ApiClient {
   String? baseUrl;
 
   @override
-  Future<List<User>> getUsers() async {
+  Future<List<UserEntity>> getUsers() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<User>>(Options(
+    final _result = await _dio
+        .fetch<List<dynamic>>(_setStreamType<List<UserEntity>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -40,7 +40,7 @@ class _ApiClient implements ApiClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!
-        .map((dynamic i) => User.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => UserEntity.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }

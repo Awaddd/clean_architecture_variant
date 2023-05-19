@@ -14,7 +14,7 @@ class DeleteUsersButton extends ConsumerStatefulWidget {
 class _DeleteUsersButtonState extends ConsumerState<DeleteUsersButton> {
   Future<void> deleteUsers() async {
     final db = await ref.read(cacheProvider);
-    final usersBox = await db.openBox<HiveUser>('users');
+    final usersBox = await db.openBox<User>('users');
     usersBox.clear();
   }
 
