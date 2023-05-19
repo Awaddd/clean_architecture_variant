@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:clean_architecture/core/api/api_client.dart';
-import 'package:clean_architecture/data/user/user.dart';
+import 'package:clean_architecture/data/database/user/user.dart';
+import 'package:clean_architecture/data/network/client/api_client.dart';
 import 'package:dio/dio.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';

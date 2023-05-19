@@ -1,4 +1,4 @@
-import 'package:clean_architecture/data/user/user.dart';
+import 'package:clean_architecture/data/database/user/user.dart';
 import 'package:clean_architecture/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

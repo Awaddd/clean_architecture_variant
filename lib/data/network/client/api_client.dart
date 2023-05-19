@@ -1,4 +1,4 @@
-import 'package:clean_architecture/models/user/user.dart';
+import 'package:clean_architecture/data/network/user/user.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 

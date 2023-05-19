@@ -1,4 +1,4 @@
-import 'package:clean_architecture/data/user/user.dart';
+import 'package:clean_architecture/data/database/user/user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user.g.dart';
