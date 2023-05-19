@@ -1,35 +1,61 @@
 import 'package:clean_architecture/core/api/api_client.dart';
+import 'package:clean_architecture/data/user/user.dart';
+import 'package:clean_architecture/main.dart';
 import 'package:clean_architecture/models/user/user.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class UserList extends StatefulWidget {
+class UserList extends ConsumerStatefulWidget {
   const UserList({super.key});
 
   @override
-  State<UserList> createState() => _UserListState();
+  ConsumerState<UserList> createState() => _UserListState();
 }
 
-class _UserListState extends State<UserList> {
+class _UserListState extends ConsumerState<UserList> {
   List<User> users = [];
   bool loading = true;
 
-  Future getUsers() async {
-    final apiClient =
-        ApiClient(Dio(BaseOptions(contentType: "application/json")));
+  Future<void> getUsers() async {
+    final db = await ref.read(cacheProvider);
+    final usersBox = await db.openBox<HiveUser>('users');
+    var usersInCache = await usersBox.getAllValues();
 
-    apiClient.getUsers().then((response) {
+    //if cache is empty, make api call and store in cache
+    if (usersInCache.isEmpty) {
+      print('Cache is empty - making api call');
+
+      final apiClient = ApiClient(
+        Dio(BaseOptions(contentType: "application/json")),
+      );
+
+      await apiClient.getUsers().then((response) async {
+        for (final user in response) {
+          await usersBox.put(user.id.toString(), HiveUser.fromUserEntity(user));
+        }
+      });
+    }
+
+    final List<User> list = [];
+
+    usersInCache = await usersBox.getAllValues();
+
+    usersInCache.forEach((key, value) {
+      list.add(User.fromHiveUser(value));
+    });
+
+    if (list.isNotEmpty) {
       setState(() {
-        users = response;
+        users = list;
         loading = false;
       });
-    });
+    }
   }
 
   @override
   void initState() {
     super.initState();
-
     getUsers();
   }
 
@@ -53,13 +79,29 @@ class _UserListState extends State<UserList> {
             child: Column(
               children: [
                 Text(
+                  user.id.toString(),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge
+                      ?.copyWith(fontWeight: FontWeight.bold),
+                ),
+
+                //
+                const SizedBox(height: 5),
+
+                //
+                Text(
                   user.name,
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge
                       ?.copyWith(fontWeight: FontWeight.bold),
                 ),
+
+                //
                 const SizedBox(height: 5),
+
+                //
                 Text(
                   user.email,
                   style: Theme.of(context)
