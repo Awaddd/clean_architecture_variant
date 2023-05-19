@@ -1,8 +1,5 @@
-import 'package:clean_architecture/core/api/api_client.dart';
 import 'package:clean_architecture/data/user/user.dart';
 import 'package:clean_architecture/main.dart';
-import 'package:clean_architecture/models/user/user.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -14,7 +11,7 @@ class UserList extends ConsumerStatefulWidget {
 }
 
 class _UserListState extends ConsumerState<UserList> {
-  List<User> users = [];
+  List<HiveUser> users = [];
   bool loading = true;
 
   Future<void> getUsers() async {
@@ -35,12 +32,12 @@ class _UserListState extends ConsumerState<UserList> {
       });
     }
 
-    final List<User> list = [];
+    final List<HiveUser> list = [];
 
     usersInCache = await usersBox.getAllValues();
 
     usersInCache.forEach((key, value) {
-      list.add(User.fromHiveUser(value));
+      list.add(value);
     });
 
     if (list.isNotEmpty) {
@@ -66,12 +63,12 @@ class _UserListState extends ConsumerState<UserList> {
     return _users(users);
   }
 
-  Widget _users(List<User> users) {
+  Widget _users(List<HiveUser> users) {
     return Expanded(
       child: ListView.builder(
         itemCount: users.length,
         itemBuilder: (context, index) {
-          final User user = users[index];
+          final HiveUser user = users[index];
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: Column(
